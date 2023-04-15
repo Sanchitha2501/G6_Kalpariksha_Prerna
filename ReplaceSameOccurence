@@ -1,0 +1,38 @@
+
+#include <stdio.h>
+#include <string.h>
+
+void ToBeReplaced(char *input1, char *input2)
+{
+    int i, j, k;
+    int len = strlen(input1);
+    int second_len = strlen(input2);
+    for (i = 0; i < len; i++) 
+    {
+        for (j = 0; j < second_len; j++) 
+        {
+            if (input1[i] == input2[j])
+            {
+                for (k = i; k < len; k++) 
+                {
+                    //printf("%c",input1[k]);
+                    input1[k] = input1[k+1];
+                }
+                i--;
+                len--;
+                break;
+            }
+        }
+    }
+}
+
+int main() {
+    char input1[50], input2[50];
+    printf("Input1(one word) ");
+    scanf("%s", input1);
+    printf("Input2(one word) ");
+    scanf("%s", input2);
+    ToBeReplaced(input1, input2);
+    printf("\nOutput %s", input1);
+    return 0;
+}
