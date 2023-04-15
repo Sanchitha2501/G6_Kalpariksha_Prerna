@@ -1,0 +1,64 @@
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int value;
+    struct node* left; 
+    struct node* right;
+} node;
+
+node* insert(int value)
+{
+  struct node *newnode=malloc(sizeof(node));
+  newnode->value= value;
+  newnode->left=NULL;
+  newnode->right=NULL;
+  
+  return newnode;   
+}
+
+int height(node* tnode)
+{
+    if(tnode==NULL)
+       return 0;
+       
+    return 1 + max(height(tnode->left), height(tnode->right));  
+}
+
+int max(int a, int b) 
+{ 
+    return (a > b) ? a : b;
+}
+int diameter(node* tnode)
+{
+    
+if (tnode == NULL)
+	
+  return 0;
+  
+	int leftheight = height(tnode->left);
+	int rightheight = height(tnode->right);
+	int leftdiameter = diameter(tnode->left);
+	int rightdiameter = diameter(tnode->right);
+	int result= max(leftheight + rightheight + 1,max(leftdiameter, rightdiameter));
+  
+  return result;
+}
+
+int main() {
+    int i, num, value;
+    node *root = NULL;
+    root=insert(1);
+    root->left= insert(2);
+    root->right= insert(3);
+    root->left->left= insert(4);
+    root->right->right=insert(5);
+    root->right->right->right=insert(6);
+    printf("\n Height of Tree : %d", height(root));
+    printf("\n Diameter of Tree : %d", diameter(root));
+    
+    return 0;
+}
