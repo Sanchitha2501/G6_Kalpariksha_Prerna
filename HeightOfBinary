@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+//Height
+
+typedef struct node
+{
+    int value;
+    struct node* left; 
+    struct node* right;
+} node;
+
+node* insert(int value)
+{
+        struct node *newnode=malloc(sizeof(node));
+        newnode->value= value;
+        newnode->left=NULL;
+        newnode->right=NULL;
+        return newnode;  
+}
+
+void display(node* tnode)
+{
+   if(tnode==NULL)
+   {
+       return;
+   }
+   display(tnode->left);
+   printf("%d ", tnode->value);
+   display(tnode->right);
+}
+
+int height(node *tnode)
+{
+    if(tnode==NULL)
+       return 0;
+    else
+    {
+         int leftheight= height(tnode->left);
+         int rightheight= height(tnode->right);
+         if(leftheight>rightheight)
+         {
+             return (leftheight+1);
+         }
+         else
+         return (rightheight+1);
+    }     
+}
+
+int main() {
+    int i, num, value;
+    node *root = NULL;
+    root=insert(1);
+    root->left= insert(2);
+    root->right= insert(3);
+    root->left->left= insert(4);
+    root->right->right=insert(5);
+    printf("Binary tree: \n");
+    display(root);
+    printf("\n Height of tree: %d", height(root));
+    
+    return 0;
+}
