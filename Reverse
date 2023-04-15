@@ -1,0 +1,15 @@
+//1
+#include <stdio.h>
+#include <string.h>
+void main()
+{
+   char string[100];
+    printf("Enter the string to be reversed: ");
+    scanf("%[^\n]s", string);
+	  int length=strlen(string);
+	  printf("Reverse string with in-built function:");
+    for(int i=length;i>=0;i--)
+    {
+        printf("%c", string[i]);
+    }
+}
